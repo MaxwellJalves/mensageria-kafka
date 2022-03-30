@@ -41,8 +41,6 @@ public class NovoPedidoMain {
                 ex.printStackTrace();
             }
         }
-
-
     }
 
     private static Properties properties() {
@@ -53,5 +51,8 @@ public class NovoPedidoMain {
 
         return properties;
     }
+
+
+
 }
 
