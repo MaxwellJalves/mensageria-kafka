@@ -6,6 +6,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -15,21 +17,22 @@ public class NovoPedidoMain {
 
     private static final String LOCALHOST = "localhost:9091";
 
-    public static void main(String[] args) throws ExecutionException {
+    public static void main(String[] args) throws ExecutionException, IOException {
 
         var produtor = new KafkaProducer<Integer, String>(properties());
 
+
         Map<Integer, String> publicacoes = new HashMap<>();
-        publicacoes.put(1, "Realizando solicição de pedido");
-        publicacoes.put(2, "Acessar endpoint de cep");
-        publicacoes.put(3, "Calcular frente");
-        publicacoes.put(4, "validar dados antes de finalizar o pedido");
+        publicacoes.put(1, "Guitarra");
+        publicacoes.put(2, "Teclado");
+        publicacoes.put(3, "Bateria");
+        publicacoes.put(4, "Sax Sofone");
 
 
         for (var pub : publicacoes.entrySet()) {
 
             try {
-                produtor.send(new ProducerRecord<Integer, String>("ESTUDO_TOPICO_LOJA", pub.getKey(), pub.getValue()), (data, ex) -> {
+                produtor.send(new ProducerRecord<Integer, String>("ECOMMERCE", pub.getKey(), pub.getValue()), (data, ex) -> {
                     if (ex != null) {
                         ex.printStackTrace();
                         return;
